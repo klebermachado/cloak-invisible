@@ -1,0 +1,38 @@
+{
+  "name": "capa-invisibilidade-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "build-opencv --incDir /usr/include/opencv4 --libDir /usr/lib/x86_64-linux-gnu --binDir /usr/bin --nobuild rebuild",
+    "configure": "node-gyp configure",
+    "build": "node-gyp configure build --jobs max",
+    "start": "node ./index.js",
+    "install_arm64": "build-opencv --version 4.5.4 --flag=\"-DCMAKE_SYSTEM_PROCESSOR=arm64 -DCMAKE_OSX_ARCHITECTURES=arm64\" build",
+    "install_4.5.5_cuda": "build-opencv --version 4.5.5 --flags=\"-DWITH_CUDA=ON -DWITH_CUDNN=ON -DOPENCV_DNN_CUDA=ON -DCUDA_FAST_MATH=ON\" build",
+    "do-install": "build-opencv build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@u4/opencv4nodejs": "^6.5.3",
+    "express": "^4.19.2",
+    "node-gyp": "^10.1.0",
+    "opencv-build": "^0.1.9"
+  },
+  "opencv4nodejs": {
+    "disableAutoBuild": 1,
+    "opencvIncludeDir": "/usr/include/opencv4",
+    "opencvLibDir": "/usr/lib/x86_64-linux-gnu",
+    "opencvBinDir": "/usr/bin",
+    "autoBuildOpencvVersion": "4.6.0"
+  },
+  "gypfile": true,
+  "overrides": {
+    "@parcel/watcher": "2.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
