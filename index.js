@@ -16,16 +16,19 @@ let firstFrameCaptured = false;
 function replaceGreenScreen(frame, background) {
 	const hsvFrame = frame.cvtColor(cv.COLOR_BGR2HSV);
 
+	// documentação para calcular o range de cores
+	// https://medium.com/@gowtham180502/how-to-detect-colors-using-opencv-python-98aa0241e713
+
 	// cor verde
-	const lowerGreen = new cv.Vec(50, 100, 100); // Hue, Saturation, Value
-	const upperGreen = new cv.Vec(70, 255, 255); // Hue, Saturation, Value
+	// const lowerColor = new cv.Vec(50, 100, 100); // Hue, Saturation, Value
+	// const upperColor = new cv.Vec(70, 255, 255); // Hue, Saturation, Value
 
 	// Para azul escuro, você pode começar com estes valores e ajustar conforme necessário
-	// const lowerBlue = new cv.Vec(90, 100, 100); // Hue, Saturation, Value
-	// const upperBlue = new cv.Vec(150, 255, 255); // Hue, Saturation, Value
+	const lowerColor = new cv.Vec(105, 100, 100); // Hue, Saturation, Value
+	const upperColor = new cv.Vec(128, 255, 255); // Hue, Saturation, Value
 
 
-	const greenMask = hsvFrame.inRange(lowerGreen, upperGreen);
+	const greenMask = hsvFrame.inRange(lowerColor, upperColor);
 	const notGreenMask = greenMask.bitwiseNot();
 
 	const resizedBackground = background.resize(frame.rows, frame.cols);
